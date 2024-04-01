@@ -30,6 +30,7 @@
     <ClInclude Include="..\..\include\ssuds\ordered_set.h" />
     <ClInclude Include="..\..\include\ssuds\queue.h" />
     <ClInclude Include="..\..\include\ssuds\stack.h" />
+    <ClInclude Include="..\..\include\ssuds\unordered_map.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

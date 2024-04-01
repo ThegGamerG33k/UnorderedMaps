@@ -16,34 +16,53 @@ namespace ssuds
 		unsigned int mCapacity;
 		std::hash<K> mHashGenerator;
 	public:
-		/*class unorderMapIterator()
+		class unorderMapIterator
 		{
 		protected:
-			unorderMapIterator()
-			{
+			const std::pair<K, V>* mData;
 
+			const bool* mUsed;
+
+			const unsigned int mCapacity;
+
+			int mPosition;
+
+			unorderMapIterator(int start_index, std::pair<K, V>* Data, bool* Used, unsigned int cap) : mPosition(start_index), mData(Data), mUsed(Used), mCapacity(cap)
+			{
+				for (unsigned int i = mPosition; i < mCapacity; i++)
+				{
+					if (mUsed[mPosition] == false)
+						++mPosition;
+				}
+			}
+		public:
+			friend class UnorderedMap;
+
+			bool operator== (const unorderMapIterator& other) const
+			{
+				return this->mData == other.mData && this->mUsed == other.mUsed && this->mPosition == other.mPosition;
 			}
 
-			~unorderMapIterator()
+			void const operator++()
 			{
-
+				++mPosition;
+				for (unsigned int i = mPosition; i < mCapacity; i++)
+				{
+					if (mUsed[mPosition] == false)
+						++mPosition;
+				}
 			}
 
-			const operator++()
+			std::pair<K,V> const operator*()
 			{
-
+				return mData[mPosition];
 			}
 
-			const operator*()
+			bool const operator!= (const unorderMapIterator& other) const
 			{
-
+				return this->mData != other.mData || this->mUsed != other.mUsed || this->mPosition != other.mPosition;
 			}
-
-			const operator!=()
-			{
-
-			}
-		}*/
+		};
 
 
 	private:
@@ -52,18 +71,18 @@ namespace ssuds
 			return mHashGenerator(the_key);
 		}
 	public:
-
-		/*unorderedMapIterator begin()
+		 
+		typename unorderMapIterator begin() 
 		{
-
+			return unorderMapIterator(0, this->mTableData, this->mTableUsed, mCapacity); 
 		}
 
-		unorderedMapIterator end()
+		typename unorderMapIterator end()
 		{
+			return unorderMapIterator(mCapacity, this -> mTableData, this->mTableUsed, mCapacity);
+		}
 
-		}*/
-
-		UnorderedMap<K, V>(int capacity) : mCapacity(capacity)
+		UnorderedMap(int capacity) : mCapacity(capacity)
 		{
 			mTableData = new std::pair<K, V>[capacity];
 			mTableUsed = new bool[capacity];
@@ -71,19 +90,57 @@ namespace ssuds
 				mTableUsed[i] = false;
 		}
 
-		/*~UnorderedMap<K,V>()
+		~UnorderedMap()
 		{
-
-		}*/
-
-		/*UnorderedMapIterator find(const K& key)
+			delete[]mTableData;
+			delete[]mTableUsed;
+			mSize = 0;
+			mCapacity = 0;
+		}
+		
+		typename unorderMapIterator find(const K& key)
 		{
+			unsigned long long int hash = hashGen(key);
 
-		}*/
+			int ind = hash % mCapacity;
+
+			if (mSize == 0)
+			{
+				return end();
+			}
+			else
+			{
+				if (mTableUsed[ind] != false)
+				{
+					return unorderMapIterator(ind, mTableData, mTableUsed, mCapacity);
+				}
+				else
+				{
+					return end();
+				}
+			}
+		}
 
 		/*bool remove(const K& key)
 		{
+			unsigned long long hash = hashGen(the_key);
 
+			unsigned long long ind = hash % mCapacity;
+			if (mSize == 0)
+			{
+				return false;
+			}
+			else
+			{
+				for (int i = ; i < mCapacity; i++)
+					if mTableData[i] == ind
+					{
+						delete(mTableData[i]);
+						mSize--;
+						return true;
+					}
+				return false;
+			}
 		}*/
 
 		friend std::ostream& operator<<(std::ostream& os, const UnorderedMap& M)
@@ -100,7 +157,7 @@ namespace ssuds
 					}
 					else
 					{
-						os << M.mTableData[i].first << ":" << M.mTableData[i].second << ", "
+						os << M.mTableData[i].first << ":" << M.mTableData[i].second << ", ";
 					}
 				}
 				else
@@ -118,7 +175,7 @@ namespace ssuds
 			return mSize;
 		}
 
-		int capacity() const
+		unsigned int capacity() const
 		{
 			return mCapacity;
 		}
@@ -128,7 +185,7 @@ namespace ssuds
 			unsigned long long hash = hashGen(the_key);
 
 			unsigned long long ind = hash % mCapacity;
-			for (int i = 0; i < mCapacity; i++)
+			for (unsigned int i = 0; i < mCapacity; i++)
 			{
 				if (mTableUsed[ind] == true)
 				{
