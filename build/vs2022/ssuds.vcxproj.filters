@@ -42,6 +42,9 @@
     <ClCompile Include="..\..\src\ssuds\ordered_set_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="unordered_map_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ssuds\array_list.h">

@@ -1,3 +1,6 @@
 ﻿  main.cpp
-C:\Users\nweller\source\repos\UnorderedMaps_Take\include\ssuds\unordered_map.h(223): warning C4715: 'ssuds::UnorderedMap<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int>::operator[]': not all control paths return a value
-  ssuds.vcxproj -> C:\Users\nweller\source\repos\UnorderedMaps_Take\bin\vs2022\Debug\ssuds_d.exe
+  unordered_map_test.cpp
+  Generating Code...
+C:\Users\welle_489k6yj\Source\Repos\UnorderedMaps\include\ssuds\unordered_map.h(277): warning C4715: 'ssuds::UnorderedMap<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int>::operator[]': not all control paths return a value
+C:\Users\welle_489k6yj\Source\Repos\UnorderedMaps\include\ssuds\unordered_map.h(194): warning C4715: 'ssuds::UnorderedMap<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int>::remove': not all control paths return a value
+  ssuds.vcxproj -> C:\Users\welle_489k6yj\source\repos\UnorderedMaps\bin\vs2022\Debug\ssuds_d.exe

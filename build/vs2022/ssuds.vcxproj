@@ -20,6 +20,7 @@
     <ClCompile Include="..\..\src\ssuds\linked_list_tests.cpp" />
     <ClCompile Include="..\..\src\ssuds\ordered_set_tests.cpp" />
     <ClCompile Include="..\..\src\stack_tests.cpp" />
+    <ClCompile Include="unordered_map_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\misc\word_drawer.h" />
